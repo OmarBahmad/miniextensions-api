@@ -11,7 +11,7 @@ const initialState: DataState = {
 }
 
 export const fetchDataAsync = createAsyncThunk(
-  'data/fetchDataAsync',
+  'data/fetchData',
   async (): Promise<Array<DataInstance>> => {
     const response = await FetchAPI();
     return response;
@@ -26,15 +26,17 @@ const dataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDataAsync.pending, (state:DataState) => {
+        console.log("pending")
         state.loading = true;
       })
       .addCase(fetchDataAsync.fulfilled, (state:DataState, action: PayloadAction<Array<DataInstance>>) => {
+        console.log("fulfilled")
         state.loading = false;
         state.data = action.payload;
       })
       .addCase(fetchDataAsync.rejected, (state:DataState) => {
+        console.log("rejected")
         state.loading = false;
-
       })
   }
 })

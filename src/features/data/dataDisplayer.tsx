@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { DataInstance, InstanceData } from "./dataAPI";
+import { DataInstance, StudentData } from "./dataAPI";
 import { fetchDataAsync } from "./dataSlice";
 
 const DataDisplayer = () => {
@@ -20,19 +20,12 @@ const DataDisplayer = () => {
     }
   }, []);
 
-  const redenredData = data.map((eachData: DataInstance) => {
-  console.log("datafirstmap", eachData)
+  const redenredData :any = data.Classes?.map((eachData: any) => {
 
-    const insideElements = eachData.data.map((eachInstanceData: InstanceData) => {
-      {console.log("datasecondmap", eachInstanceData)}
-      return(<p> {eachInstanceData.header} : {eachInstanceData.length}</p>)
-      
-    })
-    
+      {console.log("datasecondmap", eachData)}
     return(
       <>
-        <h1>{eachData.header}</h1>
-        {insideElements}
+        <p>{eachData}</p>
       </>
     )
   })
@@ -40,7 +33,8 @@ const DataDisplayer = () => {
 
   return(
     <div>
-      {redenredData}
+      <h1>{data.Name}</h1>
+      <h2>{redenredData}</h2>
     </div>
   )
 }
